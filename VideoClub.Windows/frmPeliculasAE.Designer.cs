@@ -194,7 +194,6 @@ namespace VideoClub.Windows
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(400, 218);
             this.panel2.TabIndex = 214;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // EstadosComboBox
             // 
@@ -244,7 +243,6 @@ namespace VideoClub.Windows
             this.SoportesLabel.Size = new System.Drawing.Size(67, 16);
             this.SoportesLabel.TabIndex = 182;
             this.SoportesLabel.Text = "Soporte:";
-            this.SoportesLabel.Click += new System.EventHandler(this.lblLocalidad_Click);
             // 
             // CalificacionLabel
             // 
