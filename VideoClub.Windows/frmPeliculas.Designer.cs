@@ -65,7 +65,6 @@ namespace VideoClub.Windows
             this.DatosDataGridView.AllowUserToDeleteRows = false;
             this.DatosDataGridView.AllowUserToResizeColumns = false;
             this.DatosDataGridView.AllowUserToResizeRows = false;
-            this.DatosDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DatosDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cmnTitulo,
             this.cmnGenero,
@@ -79,7 +78,6 @@ namespace VideoClub.Windows
             this.DatosDataGridView.Location = new System.Drawing.Point(0, 0);
             this.DatosDataGridView.MultiSelect = false;
             this.DatosDataGridView.Name = "DatosDataGridView";
-            this.DatosDataGridView.ReadOnly = true;
             this.DatosDataGridView.RowHeadersVisible = false;
             this.DatosDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DatosDataGridView.Size = new System.Drawing.Size(800, 396);
@@ -180,6 +178,7 @@ namespace VideoClub.Windows
             this.EditarToolStripButton.Size = new System.Drawing.Size(41, 51);
             this.EditarToolStripButton.Text = "Editar";
             this.EditarToolStripButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.EditarToolStripButton.Click += new System.EventHandler(this.EditarToolStripButton_Click);
             // 
             // BorrarToolStripButton
             // 
@@ -190,6 +189,7 @@ namespace VideoClub.Windows
             this.BorrarToolStripButton.Size = new System.Drawing.Size(43, 51);
             this.BorrarToolStripButton.Text = "Borrar";
             this.BorrarToolStripButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BorrarToolStripButton.Click += new System.EventHandler(this.BorrarToolStripButton_Click);
             // 
             // CerrarToolStripButton
             // 

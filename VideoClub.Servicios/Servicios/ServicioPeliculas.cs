@@ -34,21 +34,49 @@ namespace VideoClub.Servicios.Servicios
 
         public void Guardar(Pelicula pelicula)
         {
-            throw new NotImplementedException();
+            try
+            {
+                repositorio.Guardar(pelicula);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         public void Borrar(int peliculaId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                repositorio.Borrar(peliculaId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool EstaRelacionado(Pelicula pelicula)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return repositorio.EstaRelacionado(pelicula);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Existe(Pelicula pelicula)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return repositorio.Existe(pelicula);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

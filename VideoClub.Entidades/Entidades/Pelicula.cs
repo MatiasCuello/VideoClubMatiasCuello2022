@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideoClub.Entidades.Entidades
 {
-    public class Pelicula
+    public class Pelicula:ICloneable
     {
         public int PeliculaId { get; set; }
         public string Titulo { get; set; }
@@ -24,5 +24,9 @@ namespace VideoClub.Entidades.Entidades
         public Calificacion Calificacion { get; set; }
         public Soporte Soporte { get; set; }
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

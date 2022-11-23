@@ -68,8 +68,11 @@
     <Compile Include="frmPeliculasAE.Designer.cs">
       <DependentUpon>frmPeliculasAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HelperCombos.cs" />
     <Compile Include="Helpers\HelperForm.cs" />
     <Compile Include="Helpers\HelperGrilla.cs" />
+    <Compile Include="Helpers\HelperMensaje.cs" />
+    <Compile Include="Helpers\TipoMensaje.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmPeliculas.resx">

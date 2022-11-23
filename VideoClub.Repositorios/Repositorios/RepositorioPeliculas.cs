@@ -19,15 +19,57 @@ namespace VideoClub.Repositorios.Repositorios.Facades
 
         public void Borrar(int peliculaId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var peliculaIdDb = context.Peliculas.SingleOrDefault(p => p.PeliculaId == peliculaId);
+                if (peliculaIdDb == null)
+                {
+                    throw new Exception("El codigo de la pelicula es inexistente");
+                }
+
+                context.Entry(peliculaId).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool EstaRelacionado(Pelicula pelicula)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return context.Peliculas
+                    .Any(p => p.PeliculaId == pelicula.PeliculaId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Existe(Pelicula pelicula)
+        {
+            try
+            {
+                if (pelicula.PeliculaId == 0)
+                {
+                    return context.Peliculas
+                        .Any(p => p.Titulo == pelicula.Titulo);
+                }
+
+                return context.Peliculas.Any(p => p.Titulo == pelicula.Titulo &&
+                                                    p.GeneroId != pelicula.GeneroId &&
+                                                    p.DuracionEnMinutos != pelicula.DuracionEnMinutos);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public void Borrar(object pelicula)
         {
             throw new NotImplementedException();
         }
@@ -61,7 +103,38 @@ namespace VideoClub.Repositorios.Repositorios.Facades
 
         public void Guardar(Pelicula pelicula)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (pelicula.PeliculaId == 0)
+                {
+                    context.Peliculas.Add(pelicula);
+                }
+                else
+                {
+                    var peliculaInDb = context.Peliculas.SingleOrDefault(p => p.PeliculaId == pelicula.PeliculaId);
+                    if (peliculaInDb == null)
+                    {
+                        throw new Exception("El codigo de la Pelicula es inexistente");
+                    }
+
+                    peliculaInDb.Titulo = pelicula.Titulo;
+                    peliculaInDb.GeneroId = pelicula.GeneroId;
+                    peliculaInDb.FechaIncorporacion = pelicula.FechaIncorporacion;
+                    peliculaInDb.EstadoId = pelicula.EstadoId;
+                    peliculaInDb.DuracionEnMinutos = pelicula.DuracionEnMinutos;
+                    peliculaInDb.CalificacionId = pelicula.CalificacionId;
+                    peliculaInDb.Activa = pelicula.Activa;
+
+                    context.Entry(pelicula).State = EntityState.Modified;
+
+                }
+
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

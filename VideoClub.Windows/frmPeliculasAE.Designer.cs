@@ -29,6 +29,7 @@ namespace VideoClub.Windows
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
@@ -42,14 +43,17 @@ namespace VideoClub.Windows
             this.DuracionLabel = new System.Windows.Forms.Label();
             this.TituloLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ActivoCheckBox = new System.Windows.Forms.CheckBox();
             this.EstadosComboBox = new System.Windows.Forms.ComboBox();
             this.EstadosLabel = new System.Windows.Forms.Label();
             this.SoportesComboBox = new System.Windows.Forms.ComboBox();
             this.CalificacionesComboBox = new System.Windows.Forms.ComboBox();
             this.SoportesLabel = new System.Windows.Forms.Label();
             this.CalificacionLabel = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -60,7 +64,7 @@ namespace VideoClub.Windows
             this.panel1.Controls.Add(this.PeliculaLabel);
             this.panel1.Location = new System.Drawing.Point(422, 22);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(254, 218);
+            this.panel1.Size = new System.Drawing.Size(254, 258);
             this.panel1.TabIndex = 213;
             // 
             // OkButton
@@ -74,6 +78,7 @@ namespace VideoClub.Windows
             this.OkButton.Text = "OK";
             this.OkButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.OkButton.UseVisualStyleBackColor = false;
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // CancelButton
             // 
@@ -177,6 +182,7 @@ namespace VideoClub.Windows
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel2.Controls.Add(this.ActivoCheckBox);
             this.panel2.Controls.Add(this.EstadosComboBox);
             this.panel2.Controls.Add(this.EstadosLabel);
             this.panel2.Controls.Add(this.DuracionTextBox);
@@ -192,8 +198,20 @@ namespace VideoClub.Windows
             this.panel2.Controls.Add(this.GenerosLabel);
             this.panel2.Location = new System.Drawing.Point(12, 22);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(400, 218);
+            this.panel2.Size = new System.Drawing.Size(400, 258);
             this.panel2.TabIndex = 214;
+            // 
+            // ActivoCheckBox
+            // 
+            this.ActivoCheckBox.AutoSize = true;
+            this.ActivoCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ActivoCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActivoCheckBox.Location = new System.Drawing.Point(25, 217);
+            this.ActivoCheckBox.Name = "ActivoCheckBox";
+            this.ActivoCheckBox.Size = new System.Drawing.Size(70, 20);
+            this.ActivoCheckBox.TabIndex = 215;
+            this.ActivoCheckBox.Text = "Activo";
+            this.ActivoCheckBox.UseVisualStyleBackColor = true;
             // 
             // EstadosComboBox
             // 
@@ -254,17 +272,22 @@ namespace VideoClub.Windows
             this.CalificacionLabel.Size = new System.Drawing.Size(93, 16);
             this.CalificacionLabel.TabIndex = 182;
             this.CalificacionLabel.Text = "Calificacion:";
-            this.CalificacionLabel.Click += new System.EventHandler(this.lblLocalidad_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmPeliculasAE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 261);
+            this.ClientSize = new System.Drawing.Size(684, 291);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TituloTextBox);
             this.Controls.Add(this.panel2);
+            this.MaximumSize = new System.Drawing.Size(700, 330);
+            this.MinimumSize = new System.Drawing.Size(700, 330);
             this.Name = "frmPeliculasAE";
             this.Text = "frmPeliculasAE";
             this.Load += new System.EventHandler(this.frmPeliculasAE_Load);
@@ -272,6 +295,7 @@ namespace VideoClub.Windows
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,5 +322,7 @@ namespace VideoClub.Windows
         private System.Windows.Forms.Label EstadosLabel;
         private System.Windows.Forms.ComboBox SoportesComboBox;
         private System.Windows.Forms.Label SoportesLabel;
+        private System.Windows.Forms.CheckBox ActivoCheckBox;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using VideoClub.Entidades.Entidades;
 using VideoClub.Servicios.Servicios;
 using VideoClub.Servicios.Servicios.Facades;
+using VideoClub.Windows.Helper;
 using VideoClub.Windows.Helpers;
 
 namespace VideoClub.Windows
@@ -32,23 +33,133 @@ namespace VideoClub.Windows
         private void frmPeliculas_Load(object sender, EventArgs e)
         {
             servicio = new ServicioPeliculas();
-            try
-            {
-                lista = servicio.GetLista(null,null, null, null);
-                HelperForm.MostrarDatosEnGrilla(DatosDataGridView, lista);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
-            }
+            RecargarGrilla();
         }
 
         private void NuevoToolStripButton_Click(object sender, EventArgs e)
         {
-            frmPeliculasAE frm = new frmPeliculasAE { Text = "Nueva Pelicula" };
+            frmPeliculasAE frm = new frmPeliculasAE() { Text = "Agregar Pelicula" };
             DialogResult dr = frm.ShowDialog(this);
-            
+            if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
+            try
+            {
+                Pelicula pelicula = frm.GetPelicula();
+                if (!servicio.Existe(pelicula))
+                {
+                    servicio.Guardar(pelicula);
+                    RecargarGrilla();
+
+                    HelperMensaje.Mensaje(TipoMensaje.OK, "Registro agregado", "Mensaje");
+                }
+                else
+                {
+                    HelperMensaje.Mensaje(TipoMensaje.Error, "Registro repetido!!", "Error");
+                }
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+       
+        private void RecargarGrilla()
+        {
+            try
+            {
+                lista = servicio.GetLista(null, null, null, null);
+                HelperForm.MostrarDatosEnGrilla(DatosDataGridView, lista);
+            }
+            catch (Exception exception)
+            {
+                HelperMensaje.Mensaje(TipoMensaje.Error, exception.Message, "Error");
+            }
+        }
+
+        private void BorrarToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (DatosDataGridView.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var r = DatosDataGridView.SelectedRows[0];
+            Pelicula pelicula = (Pelicula)r.Tag;
+            DialogResult dr = HelperMensaje.Mensaje($"¿Desea borrar la pelicula {pelicula.Titulo}?",
+                "Confirmar Eliminacion");
+            if (dr == DialogResult.No)
+            {
+                return;
+            }
+
+            try
+            {
+                if (servicio.EstaRelacionado(pelicula))
+                {
+                    servicio.Borrar(pelicula.PeliculaId);
+                    HelperGrilla.BorrarFila(DatosDataGridView, r);
+                    HelperMensaje.Mensaje(TipoMensaje.OK, "Registro eliminado",
+                        "Mensaje");
+                }
+                else
+                {
+                    HelperMensaje.Mensaje(TipoMensaje.Error, "Registro relacionadon\nBaja denegada",
+                        "Error");
+
+                }
+            }
+            catch (Exception exception)
+            {
+                HelperMensaje.Mensaje(TipoMensaje.Error, exception.Message,
+                    "Error");
+            }
+        }
+
+        private void EditarToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (DatosDataGridView.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            var r = DatosDataGridView.SelectedRows[0];
+            Pelicula pelicula = (Pelicula)r.Tag;
+            //Pelicula PeliAuxiliar = (Pelicula)p.Clone();
+
+            try
+            {
+                frmPeliculasAE frm = new frmPeliculasAE() { Text = "Editar Pelicula" };
+                frm.SetPelicula(pelicula);
+                DialogResult dr = frm.ShowDialog(this);
+                if (dr == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                pelicula = frm.GetPelicula();
+                if (!servicio.Existe(pelicula))
+                {
+                    servicio.Guardar(pelicula);
+                    HelperGrilla.SetearFila(r, pelicula);
+                    HelperMensaje.Mensaje(TipoMensaje.OK, "Pelicula editada", "Mensaje");
+                }
+                else
+                {
+                    //HelperGrilla.SetearFila(r, PeliAuxiliar);
+                    HelperMensaje.Mensaje(TipoMensaje.Error, "Pelicula Existente", "Error");
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //HelperGrilla.SetearFila(r, PeliAuxiliar);
+
+                HelperMensaje.Mensaje(TipoMensaje.Error, exception.Message, "Error");
+            }
         }
     }
 }
