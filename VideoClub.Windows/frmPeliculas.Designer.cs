@@ -63,8 +63,6 @@ namespace VideoClub.Windows
             // 
             this.DatosDataGridView.AllowUserToAddRows = false;
             this.DatosDataGridView.AllowUserToDeleteRows = false;
-            this.DatosDataGridView.AllowUserToResizeColumns = false;
-            this.DatosDataGridView.AllowUserToResizeRows = false;
             this.DatosDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cmnTitulo,
             this.cmnGenero,
@@ -78,7 +76,6 @@ namespace VideoClub.Windows
             this.DatosDataGridView.Location = new System.Drawing.Point(0, 0);
             this.DatosDataGridView.MultiSelect = false;
             this.DatosDataGridView.Name = "DatosDataGridView";
-            this.DatosDataGridView.RowHeadersVisible = false;
             this.DatosDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DatosDataGridView.Size = new System.Drawing.Size(800, 396);
             this.DatosDataGridView.TabIndex = 1;
